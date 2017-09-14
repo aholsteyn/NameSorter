@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gxassessment;
+package assessment;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -37,7 +37,7 @@ public class NameFileReader {
             return personsList;
 
         } catch (IOException e) {
-            throw new RuntimeException("Could not read file: " + FILENAME,e);
+            throw new RuntimeException("Could not read file: " + FILENAME, e);
         }
     }
 }
