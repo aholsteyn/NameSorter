@@ -28,11 +28,15 @@ public class NameFileWriter {
         if (persons != null) {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {
                     // Small hack to avoid writing a newline at the end of file
-                    writer.write(persons.remove(0).getName().toString());
+                    Person firstPerson = persons.remove(0);
+                    writer.write(firstPerson.getName().toString());
+                    // Write each person name in a new line
                     for (Person p : persons) {
                         writer.newLine();
                         writer.write(p.getName().toString());
                     }
+                    // Restore original list state
+                    persons.add(0, firstPerson);
             } catch (IOException e){
                 throw new RuntimeException("Could not write to file: " + FILENAME, e);
             }

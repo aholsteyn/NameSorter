@@ -11,47 +11,19 @@ package gxassessment;
  */
 public class Person implements IPerson {
    
-    private String givenNames;
-    private String lastName;
+    private Name name;
     
     public Person (String fullName) {
-        validateName(fullName);
-        setName(fullName);
+        name = new Name(fullName);
     }
     
-    private void validateName(String fullName) {
-        int namesTotal = fullName.split(" ").length;
-        if (namesTotal <= 1 || namesTotal > 4)
-            throw new RuntimeException("Input name (" + fullName + ") has no last name or more than 3 given names.");
+    @Override
+    public Name getName() {
+        return name;
     }
     
-    private void setName(String fullName) {
-        int lastWord = fullName.lastIndexOf(" ");
-        lastName = fullName.substring(lastWord + 1);
-        givenNames = fullName.substring(0, lastWord);
-    }
-    
-    public void updateName(String fullName) {
-        setName(fullName);
-    }
-
-    public String getName() {
-        return givenNames + " " + lastName;
-    }
-
-    public String getGivenNames() {
-        return givenNames;
-    }
-
-    public void setGivenNames(String givenNames) {
-        this.givenNames = givenNames;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    @Override
+    public void setName(Name newName) {
+        name = newName;
     }
 }

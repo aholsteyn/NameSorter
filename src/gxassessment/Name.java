@@ -10,16 +10,31 @@ package gxassessment;
  * @author Hols
  */
 public class Name {
+    
     private String lastName;
     private String givenNames;
 
     public Name (String fullName) {
+        validateName(fullName);
+        setName(fullName);
+    }
+
+    private void validateName(String fullName) {
+        int namesTotal = fullName.split(" ").length;
+        if (namesTotal <= 1 || namesTotal > 4)
+            throw new RuntimeException("Input name (" + fullName + ") has no last name or more than 3 given names.");
+    }
+    
+    private void setName(String fullName) {
         int lastWord = fullName.lastIndexOf(" ");
-        //if (lastWord > 4) throw InvalidGivenNamesException();
         lastName = fullName.substring(lastWord + 1);
         givenNames = fullName.substring(0, lastWord);
     }
-
+    
+    public void updateName(String fullName) {
+        setName(fullName);
+    }
+    
     public String getGivenNames() {
         return givenNames;
     }

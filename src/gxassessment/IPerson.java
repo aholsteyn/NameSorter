@@ -10,5 +10,6 @@ package gxassessment;
  * @author Hols
  */
 public interface IPerson {
-    public String getName();    
+    public Name getName();
+    public void setName(Name newName);
 }

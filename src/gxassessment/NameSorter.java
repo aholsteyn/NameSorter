@@ -6,8 +6,6 @@
 package gxassessment;
 
 import java.io.IOException;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -25,9 +23,7 @@ public class NameSorter {
             List<Person> persons = new NameFileReader(args[0]).ProcessFile();
             
             // Sort names
-            Comparator nameComparator = Comparator.comparing(Person::getLastName, String.CASE_INSENSITIVE_ORDER)
-                    .thenComparing(Person::getGivenNames, String.CASE_INSENSITIVE_ORDER);
-            Collections.sort(persons, nameComparator);
+            new GenericListSort().sort(persons, new PersonComparator());
             
             // Write sorted list to file
             String outputFileName = "sorted-names-list.txt";
@@ -35,10 +31,9 @@ public class NameSorter {
             
             // Write sorted list to output
             persons.forEach(person -> System.out.println(person.getName()));
-            
+
         } catch(RuntimeException | IOException e) {
             System.out.println(e.getMessage());
         }
     }
-    
 }
