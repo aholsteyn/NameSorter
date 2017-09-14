@@ -19,10 +19,19 @@ public class NameFileWriter {
     
     private final String FILENAME;
     
+    /**
+     *
+     * @param fileName
+     */
     public NameFileWriter (String fileName) {
         this.FILENAME = fileName;
     }
     
+    /**
+     *
+     * @param persons
+     * @throws IOException
+     */
     public void Write(List<Person> persons) throws IOException {
         File outputFile = new File(FILENAME);
         if (persons != null) {

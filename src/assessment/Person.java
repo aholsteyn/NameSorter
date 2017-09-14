@@ -13,15 +13,27 @@ public class Person implements IPerson {
    
     private Name name;
     
+    /**
+     *
+     * @param fullName
+     */
     public Person (String fullName) {
         name = new Name(fullName);
     }
     
+    /**
+     *
+     * @return
+     */
     @Override
     public Name getName() {
         return name;
     }
     
+    /**
+     *
+     * @param newName
+     */
     @Override
     public void setName(Name newName) {
         name = newName;

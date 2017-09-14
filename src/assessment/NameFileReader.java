@@ -19,10 +19,18 @@ public class NameFileReader {
     
     private final String FILENAME;
 
+    /**
+     *
+     * @param fileName
+     */
     public NameFileReader(String fileName) {
         this.FILENAME = fileName;
     }
     
+    /**
+     *
+     * @return
+     */
     public List<Person> ProcessFile() {
         try (BufferedReader br = new BufferedReader(new FileReader(FILENAME))) {
             

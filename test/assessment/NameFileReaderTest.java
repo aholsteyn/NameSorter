@@ -5,15 +5,13 @@
  */
 package assessment;
 
-import assessment.NameFileReader;
-import assessment.Person;
+import testUtils.MockData;
+import testUtils.TestUtils;
+import java.util.ArrayList;
 import java.util.List;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
 
 /**
  *
@@ -21,44 +19,28 @@ import static org.junit.Assert.*;
  */
 public class NameFileReaderTest {
     
-    public NameFileReaderTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
-
     /**
      * Test of ProcessFile method, of class NameFileReader.
+     * Tests for size, not empty, same size as expected result, same names as result
      */
     @Test
     public void testProcessFile() {
-        System.out.println("Process File with correct name");
-        NameFileReader instance = new NameFileReader("unsorted-names-list.txt");
-        List<Person> expResult = null;
-        List<Person> result = instance.ProcessFile();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        NameFileReader instance = new NameFileReader("test/unsorted-names-list.txt");
+        List<String> expResult = TestUtils.ConvertPersonListToNameList(new MockData().expectedUnorderedList());
+        List<String> result = TestUtils.ConvertPersonListToNameList(instance.ProcessFile());
+        assertThat(result.size(), is(14));
+        assertThat(result.size(), is(expResult.size()));
+        assertThat(result, not(is(new ArrayList())));
+        assertThat(result, is(expResult));
     }
     
+    /**
+     * Test of ProcessFile method, of class NameFileReader.
+     * Tests invalid file name
+     */
     @Test (expected = RuntimeException.class)
     public void testProcessFileWithWrongFileName() {
-        System.out.println("Process File with wrong file name");
         NameFileReader instance = new NameFileReader("WrongFileName.txt");
-        List<Person> result = instance.ProcessFile();
+        instance.ProcessFile();
     }
-    
 }

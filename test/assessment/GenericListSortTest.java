@@ -5,13 +5,14 @@
  */
 package assessment;
 
-import assessment.GenericListSort;
+import testUtils.MockData;
+import testUtils.TestUtils;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import org.junit.After;
-import org.junit.AfterClass;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -20,25 +21,15 @@ import static org.junit.Assert.*;
  * @author Hols
  */
 public class GenericListSortTest {
+        
+    private Comparator comparator;
     
-    public GenericListSortTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
+    /**
+     *
+     */
     @Before
     public void setUp() {
-        
-    }
-    
-    @After
-    public void tearDown() {
+        comparator = new PersonComparator();
     }
 
     /**
@@ -46,13 +37,13 @@ public class GenericListSortTest {
      */
     @Test
     public void testSort() {
-        System.out.println("sort");
-        List genericList = null;
-        Comparator comparator = null;
-        GenericListSort instance = new GenericListSort();
-        instance.sort(genericList, comparator);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        List<Person> unorderedList = new MockData().expectedUnorderedList();
+        List<String> expResult = TestUtils.ConvertPersonListToNameList(new MockData().expectedOrderedList());
+        new GenericListSort().sort(unorderedList, comparator);
+        List<String> result = TestUtils.ConvertPersonListToNameList(unorderedList);
+        assertThat(result.size(), is(14));
+        assertThat(result.size(), is(expResult.size()));
+        assertThat(result, not(is(new ArrayList())));
+        assertThat(result, is(expResult));
     }
-    
 }

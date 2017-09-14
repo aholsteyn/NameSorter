@@ -15,6 +15,11 @@ import java.util.List;
  */
 public class GenericListSort {
         
+    /**
+     *
+     * @param genericList
+     * @param comparator
+     */
     public void sort(List genericList, Comparator comparator) {
         Collections.sort(genericList, comparator);
     }

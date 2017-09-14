@@ -10,6 +10,16 @@ package assessment;
  * @author Hols
  */
 public interface IPerson {
+
+    /**
+     *
+     * @return
+     */
     public Name getName();
+
+    /**
+     *
+     * @param newName
+     */
     public void setName(Name newName);
 }
